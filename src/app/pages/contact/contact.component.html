@@ -1,0 +1,155 @@
+<section class="contact">
+  <div class="container">
+    <header class="header">
+      <h1>On discute de votre projet&nbsp;?</h1>
+      <p class="lead">
+        Dites-moi en quelques lignes votre besoin. Je vous réponds sous
+        <strong>24h ouvrées</strong>.
+      </p>
+    </header>
+
+    <div class="grid">
+      <!-- Formulaire -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        novalidate
+        class="card form"
+      >
+        <div class="row">
+          <mat-form-field appearance="fill" class="fld">
+            <mat-label>Nom / Société</mat-label>
+            <input
+              matInput
+              formControlName="name"
+              placeholder="Ex. Amine • Acme SAS"
+            />
+            <mat-error
+              *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+            >
+              Indiquez votre nom (3+ caractères).
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="fld">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              formControlName="email"
+              type="email"
+              placeholder="vous@domaine.fr"
+            />
+            <mat-error
+              *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+            >
+              Email invalide.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="fill" class="fld">
+            <mat-label>Téléphone (optionnel)</mat-label>
+            <input
+              matInput
+              formControlName="phone"
+              type="tel"
+              placeholder="+33 ..."
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="fld">
+            <mat-label>Budget (optionnel)</mat-label>
+            <input
+              matInput
+              formControlName="budget"
+              placeholder="Fourchette ou ordre de grandeur"
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill" class="fld">
+          <mat-label>Message</mat-label>
+          <textarea
+            matInput
+            formControlName="message"
+            rows="6"
+            placeholder="Contexte, objectifs, échéance..."
+          ></textarea>
+          <mat-error
+            *ngIf="form.get('message')?.touched && form.get('message')?.invalid"
+          >
+            Un petit message (10+ caractères) aide à comprendre votre besoin.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- anti-spam discret -->
+        <input
+          formControlName="website"
+          class="honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
+        <div class="actions">
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="form.invalid || loading"
+          >
+            {{ loading ? "Envoi…" : "Envoyer" }}
+          </button>
+          <span class="small"
+            >🔒 RGPD : je ne partage jamais vos coordonnées.</span
+          >
+        </div>
+
+        <div class="alert success" *ngIf="success">
+          ✅ Merci ! Votre message a bien été envoyé.
+        </div>
+        <div class="alert error" *ngIf="error">
+          ⚠️ Oups, l’envoi a échoué. Réessayez, ou écrivez-moi directement :
+          <a href="mailto:contact@votredomaine.fr">contact@votredomaine.fr</a>
+        </div>
+      </form>
+
+      <!-- Coordonnées -->
+      <aside class="card aside">
+        <h2>Coordonnées</h2>
+        <ul class="info">
+          <li>
+            <span class="ico">✉️</span>
+            <a href="mailto:contact@votredomaine.fr">contact@votredomaine.fr</a>
+          </li>
+          <li>
+            <span class="ico">📞</span>
+            <a href="tel:+33600000000">+33 6 00 00 00 00</a>
+          </li>
+          <li>
+            <span class="ico">📍</span>
+            <span>France — remote / hybride</span>
+          </li>
+          <li>
+            <span class="ico">⏱️</span>
+            <span>Réponse sous 24h ouvrées</span>
+          </li>
+        </ul>
+
+        <h3>Disponibilités</h3>
+        <p class="note">
+          Créneaux d’échange : lun–ven, 12h–14h & 18h–20h (CET).
+        </p>
+
+        <div class="badges">
+          <span class="badge">Angular</span>
+          <span class="badge">NestJS</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">Flask</span>
+          <span class="badge">Python</span>
+          <span class="badge">PostgreSQL</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

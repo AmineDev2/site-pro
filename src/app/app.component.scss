@@ -1,0 +1,95 @@
+/* ===== Sécurités globales */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* jamais d’horizontal global */
+}
+* {
+  box-sizing: border-box;
+}
+
+/* ===== Conteneur principal Material */
+.sidenav-container,
+mat-sidenav-container,
+.mat-drawer-container {
+  min-height: 100vh;
+  height: auto;
+  background: #fafafa;
+  overflow: visible; /* pas de scroll interne ici */
+}
+
+/* ===== Contenu principal (hors menu) */
+mat-sidenav-content,
+.mat-drawer-content {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overflow-y: visible;
+  background: transparent;
+}
+
+/* ===== Sidenav : largeur suffisante, aucun padding, PAS de scroll ici */
+.sidenav,
+mat-sidenav,
+.mat-drawer {
+  width: 360px; /* ajuste 340–380 si besoin */
+  max-width: 92vw; /* sécurité petits écrans */
+  padding: 0; /* << supprime la bande blanche autour du toolbar */
+  background: #fff;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+
+  height: 100vh;
+  max-height: 100vh;
+
+  /* UN SEUL scroll : on coupe celui du tiroir lui-même */
+  overflow: hidden !important; /* << plus de scroll ici */
+}
+
+/* Le SEUL conteneur scrollable du menu */
+::ng-deep .mat-drawer-inner-container {
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important; /* ← scroll vertical automatique */
+
+  /* pas de bande blanche en haut ; léger tampon en bas pour les ombres */
+  padding-top: 0;
+  padding-bottom: 12px;
+
+  /* stabilise la largeur quand la barre apparaît */
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+
+/* ===== Zone de contenu centrale */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  min-height: calc(100vh - 56px - 56px); /* header + footer estimés */
+}
+
+/* ===== Footer */
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  font-size: 0.875rem;
+  color: #666;
+  text-align: center;
+  background: #fff;
+}
+
+/* ===== Responsif */
+@media (max-width: 900px) {
+  .sidenav,
+  mat-sidenav,
+  .mat-drawer {
+    width: 92vw; /* quasi plein écran en mobile sans débordement */
+  }
+  .main-content {
+    padding: 16px 12px;
+    min-height: calc(100vh - 56px - 56px);
+  }
+}

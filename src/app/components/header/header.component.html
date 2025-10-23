@@ -1,0 +1,46 @@
+<mat-toolbar color="primary" class="hdr">
+  <button
+    mat-icon-button
+    class="hdr__burger"
+    (click)="onToggle()"
+    aria-label="Ouvrir le menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/" class="hdr__brand">Amine.dev</a>
+  <span class="hdr__spacer"></span>
+  <nav class="hdr__nav">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Accueil</a
+    >
+    <a mat-button routerLink="/projets" routerLinkActive="is-active">Projets</a>
+
+    <button
+      mat-button
+      [matMenuTriggerFor]="servicesMenu"
+      routerLinkActive="is-active"
+    >
+      Services <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #servicesMenu="matMenu">
+      <button mat-menu-item routerLink="/services/ecommerce">E-commerce</button>
+      <button mat-menu-item routerLink="/services/apps-dashboards">
+        Apps & Dashboards
+      </button>
+      <button mat-menu-item routerLink="/services/integrations">
+        Intégrations & API
+      </button>
+    </mat-menu>
+
+    <a mat-button routerLink="/apropos" routerLinkActive="is-active"
+      >À propos</a
+    >
+    <a mat-raised-button color="accent" routerLink="/contact" class="hdr__cta">
+      <mat-icon class="hdr__cta-icon">send</mat-icon> Devis
+    </a>
+  </nav>
+</mat-toolbar>

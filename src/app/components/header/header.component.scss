@@ -1,0 +1,42 @@
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-inline: 12px;
+}
+
+.hdr__burger {
+  margin-right: 8px;
+}
+
+.hdr__brand {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.hdr__spacer {
+  flex: 1;
+}
+
+.hdr__nav {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  @media (min-width: 900px) {
+    display: flex;
+  }
+}
+
+.is-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hdr__cta {
+  margin-left: 8px;
+}
+.hdr__cta-icon {
+  margin-right: 4px;
+}

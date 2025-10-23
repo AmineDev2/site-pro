@@ -1,1 +1,59 @@
+/* DOIT être en tout premier */
+@use "@angular/material" as mat;
+
+/* 1) Core */
+@include mat.core();
+
+/* 2) Palettes sobres (zéro bleu) */
+$primary: mat.define-palette(mat.$cyan-palette, 500, 300, 700);
+// accent conservé
+$accent: mat.define-palette(mat.$deep-orange-palette, A200);
+
+$warn: mat.define-palette(mat.$red-palette);
+
+/* 3) Thème clair (API v16.2 “classique”: accent/warn) */
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+/* 4) Appliquer le thème à TOUS les composants */
+@include mat.all-component-themes($theme);
+
+/* 5) Variables utilitaires pour ton propre CSS */
+:root {
+  --app-primary: #{mat.get-color-from-palette($primary, 600)};
+  --app-accent: #{mat.get-color-from-palette($accent)};
+}
+
+/* --- TON CSS applicatif seulement après --- */
+/* ex. */
+.hero__accent {
+  color: var(--app-primary);
+}
+.step__num {
+  background: var(--app-primary);
+}
+
+/* Si tu utilises Tailwind, mets-le APRÈS (sinon erreur @use) */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

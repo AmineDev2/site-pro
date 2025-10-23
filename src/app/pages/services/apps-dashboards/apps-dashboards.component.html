@@ -1,0 +1,118 @@
+<!-- HERO (inchangé) -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">{{ hero.title }}</h1>
+      <p class="hero__subtitle">{{ hero.subtitle }}</p>
+      <ul class="vprops">
+        <li *ngFor="let v of valueProps" class="vprop">
+          <mat-icon class="vprop__icon">{{ v.icon }}</mat-icon>
+          <div>
+            <div class="vprop__title">{{ v.title }}</div>
+            <div class="vprop__text">{{ v.text }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <mat-card class="hero__card" appearance="outlined">
+      <figure class="media media--hero">
+        <img
+          [src]="hero.img"
+          [alt]="hero.alt"
+          width="1300"
+          height="800"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+      <mat-card-content>
+        <p class="hero__note">
+          Conception à la demande, performance, sécurité et intégrations.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+<!-- FEATURES (inchangé) -->
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Fonctionnalités clés</h2>
+    <div class="features">
+      <mat-card
+        class="feature"
+        appearance="outlined"
+        *ngFor="let f of features"
+      >
+        <figure class="media media--feature">
+          <img
+            [src]="f.img"
+            [alt]="f.alt"
+            width="1200"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="feature__icon">{{
+            f.icon
+          }}</mat-icon>
+          <mat-card-title>{{ f.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="list">
+            <li *ngFor="let b of f.bullets">{{ b }}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- PACKS -->
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Packs Apps & Dashboards</h2>
+    <div class="plans">
+      <mat-card
+        class="plan"
+        [class.plan--emph]="p.emphasized"
+        appearance="outlined"
+        *ngFor="let p of plans"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ p.name }}</mat-card-title>
+          <mat-card-subtitle>{{ p.tagline }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="plan__price">{{ p.price }}</div>
+          <ul class="list">
+            <li *ngFor="let b of p.bullets">{{ b }}</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-stroked-button color="primary" [routerLink]="p.link">{{
+            p.cta
+          }}</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title">FAQ</h2>
+    <mat-accordion class="faq" multi>
+      <mat-expansion-panel *ngFor="let f of faq">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ f.q }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ f.a }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>

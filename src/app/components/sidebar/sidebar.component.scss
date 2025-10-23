@@ -1,0 +1,185 @@
+/* Host = largeur synchronisée, aucun scroll ici (il est sur l’inner-container) */
+:host {
+  display: block;
+  width: 360px; /* même valeur que le mat-sidenav */
+  max-width: 92vw;
+  background: #fff;
+  overflow: hidden; /* pas d’horizontal, pas de vertical au host */
+}
+
+/* Barre de titre (pleine largeur, sans jour) */
+.sb__toolbar {
+  background: var(--app-primary);
+  color: #fff;
+  min-height: 56px;
+  position: static;
+  padding-inline: 12px; /* padding interne du toolbar */
+}
+.sb__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Liste : marge intérieure régulière, pas de débordement */
+.sb__list {
+  padding: 12px; /* espace autour des panneaux */
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* PANELS : encadrés, jamais plus larges, ombres visibles (grâce au padding parent) */
+.sb__panel {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Headers Material : padding maîtrisé */
+::ng-deep .mat-expansion-panel-header {
+  min-height: 52px;
+  padding-inline: 8px !important;
+}
+::ng-deep .mat-expansion-panel-header-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Icônes */
+.sb__panel-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--app-primary);
+}
+::ng-deep .mat-expansion-indicator {
+  margin-left: auto;
+}
+::ng-deep .mat-expansion-indicator::after {
+  color: var(--app-primary);
+}
+
+/* Items compacts */
+:root {
+  --mdc-list-list-item-one-line-container-height: 40px;
+}
+::ng-deep .mat-mdc-list-item {
+  height: var(--mdc-list-list-item-one-line-container-height);
+}
+::ng-deep .mat-mdc-list-item__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+::ng-deep .mat-mdc-list-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px !important;
+  color: var(--app-primary);
+}
+.li-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+/* Liens */
+a.mat-list-item {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 4px 0;
+  padding-inline: 8px;
+  border-radius: 10px;
+  color: #333;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+a.mat-list-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Actif */
+.is-active {
+  color: var(--app-primary) !important;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--app-primary);
+}
+
+/* Anti-horizontal partout dans la structure du drawer */
+mat-sidenav-container,
+.mat-drawer-container,
+mat-sidenav-content,
+.mat-drawer-content,
+mat-sidenav,
+.mat-drawer {
+  overflow-x: hidden !important;
+  max-width: 100%;
+}
+
+/* Les enfants ne dépassent jamais la largeur du tiroir */
+.sb__panel,
+.sb__panel .mat-expansion-panel-header,
+.sb__panel .mat-expansion-panel-content,
+.sb__panel .mat-expansion-panel-body,
+.sb__panel a[mat-list-item] {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+/* Texte : ellipsis (wrap sur très petits écrans) */
+.sb__header-title,
+.sb__panel a[mat-list-item] span[matListItemTitle] {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 360px) {
+  .sb__header-title,
+  .sb__panel a[mat-list-item] span[matListItemTitle] {
+    white-space: normal;
+    word-break: break-word;
+  }
+}

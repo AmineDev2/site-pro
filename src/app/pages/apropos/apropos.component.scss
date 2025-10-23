@@ -1,0 +1,546 @@
+/* =========================================================
+   Design tokens (hérite des variables globales définies
+   dans styles.scss : --app-primary, --app-accent)
+   Dark mode via :host-context(.dark-theme)
+   ========================================================= */
+:host {
+  display: block;
+
+  /* Spacing & shape */
+  --gap: 1.25rem;
+  --radius: 16px;
+  --container: 1080px;
+
+  /* Base (clair) */
+  --ink: #111827;
+  --ink-muted: #555;
+  --surface: #ffffff;
+  --surface-2: #f7f7f8;
+  --border: color-mix(in oklab, var(--ink) 10%, transparent);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Thème dérivé */
+  --primary: var(--app-primary);
+  --accent: var(--app-accent);
+
+  color: var(--ink);
+  background: transparent;
+}
+
+:host-context(.dark-theme) {
+  color-scheme: dark;
+
+  --ink: #e8e8ea;
+  --ink-muted: #b8bbc2;
+  --surface: #111418;
+  --surface-2: #171b21;
+  --border: color-mix(in oklab, var(--ink) 16%, transparent);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* éclaircir les accents en sombre pour le contraste */
+  --primary: color-mix(in oklab, var(--app-primary) 70%, white);
+  --accent: color-mix(in oklab, var(--app-accent) 85%, white);
+}
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1rem;
+  overflow: visible; /* évite de couper les ombres internes */
+}
+
+.section {
+  padding-block: 2.25rem;
+  overflow: visible; /* important pour les ombres (stats/cards) */
+}
+
+.h2 {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.2px;
+  text-wrap: balance;
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+
+  &.grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  &.grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 900px) {
+    &.grid--2,
+    &.grid--3 {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  padding-block: 3.2rem 1.6rem;
+  text-align: center;
+
+  .brand {
+    color: var(--primary);
+    background: linear-gradient(
+        0deg,
+        transparent 55%,
+        color-mix(in oklab, var(--primary) 18%, transparent) 56%
+      )
+      no-repeat;
+    background-size: 100% 100%;
+    border-radius: 6px;
+    padding-inline: 0.15em;
+  }
+
+  .hero__title {
+    margin: 0 0 0.6rem;
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .hero__lead {
+    color: var(--ink-muted);
+    max-width: 70ch;
+    margin-inline: auto;
+  }
+
+  .badges {
+    margin-top: 0.9rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+  }
+  .badge {
+    border: 1px solid color-mix(in oklab, var(--primary) 25%, transparent);
+    background: color-mix(in oklab, var(--primary) 10%, var(--surface));
+    border-radius: 999px;
+    padding: 0.38rem 0.72rem;
+    font-size: 0.92rem;
+    color: var(--ink);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    transition: transform 0.12s ease, box-shadow 0.2s ease,
+      border-color 0.2s ease;
+    &:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in oklab, var(--primary) 40%, transparent);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+
+  p {
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* items sans <ul>/<li> */
+  .items {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0.25rem 0 0;
+  }
+
+  .item {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  /* petit marqueur visuel (pas de contenu ajouté, juste décor) */
+  .item::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.6em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--primary) 70%, white);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 20%, transparent);
+  }
+
+  /* mode sombre: contraste nickel */
+  :host-context(.dark-theme) .item::before {
+    background: color-mix(in oklab, var(--primary) 65%, white);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 28%, transparent);
+  }
+
+  /* bordure dégradée subtile */
+  position: relative;
+  isolation: isolate;
+  overflow: visible; /* ne coupe pas le liseré/ombre */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      120deg,
+      color-mix(in oklab, var(--primary) 40%, transparent),
+      color-mix(in oklab, var(--accent) 32%, transparent)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+  }
+  :host-context(.dark-theme) &:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* =========================================================
+   PROCESS (steps)
+   ========================================================= */
+.process .steps {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: grid;
+  gap: 0.8rem;
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.85rem 1rem;
+  overflow: visible;
+
+  .muted {
+    color: var(--ink-muted);
+  }
+
+  /* pastille numérotée */
+  .step__num {
+    counter-increment: step;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  .step__num::after {
+    content: counter(step);
+  }
+
+  /* trait de liaison vertical (timeline) */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 1.95rem;
+    top: calc(50% + 1.1rem);
+    width: 2px;
+    height: calc(100% + 0.8rem);
+    background: linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--primary) 50%, transparent),
+      transparent
+    );
+  }
+  &:last-child::after {
+    display: none;
+  }
+}
+
+/* =========================================================
+   VALUES (chips)
+   ========================================================= */
+/* ===== VALUES: 3 par ligne, chips même taille ===== */
+:host {
+  --chip-h: clamp(60px, 7vw, 76px);
+}
+
+.values .chips {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important; /* 3 par ligne */
+  gap: 0.9rem;
+  align-items: stretch;
+}
+
+.values .chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* même largeur (déjà 1fr) + même hauteur */
+  min-height: var(--chip-h);
+  padding: 0 1.1rem;
+  border-radius: 999px;
+
+  /* styles existants (conservent ton thème) */
+  background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--primary) 10%, var(--surface)),
+      color-mix(in oklab, var(--primary) 4%, var(--surface))
+    )
+    padding-box;
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, transparent);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.05);
+
+  position: relative;
+  overflow: hidden; /* évite les sauts visuels si 2 lignes */
+}
+
+/* liseré fin (optionnel) */
+.values .chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    color-mix(in oklab, var(--primary) 42%, transparent),
+    color-mix(in oklab, var(--accent) 32%, transparent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* état hover cohérent */
+.values .chip:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--primary) 40%, transparent);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05), 0 14px 32px rgba(0, 0, 0, 0.08);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* (optionnel) sur mobile très étroit, garde 3 par ligne -> à retirer si tu veux 1/2 col en mobile */
+@media (max-width: 420px) {
+  :host {
+    --chip-h: 64px;
+  } /* un peu plus haut si textes passent sur 2 lignes */
+}
+
+/* =========================================================
+   STATS — version compatible avec <section class="stats"><div class="stat">…</div></section>
+   ========================================================= */
+
+/* La section elle-même devient la grille */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  ); /* s'adapte à la largeur */
+  gap: var(--gap);
+  margin-block: 1.5rem; /* espace autour */
+  padding-block-end: 2.5rem; /* pour laisser respirer les ombres */
+  overflow: visible; /* NE PAS couper les ombres */
+}
+
+/* Chaque carte statistique */
+.stats .stat {
+  position: relative;
+  overflow: visible; /* l’ombre/liseré ne sont pas rognés */
+  background: radial-gradient(
+      1200px 200px at 50% -10%,
+      rgba(0, 0, 0, 0.04),
+      /* fallback simple si color-mix non dispo */ transparent 60%
+    ),
+    var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+  text-align: center;
+  z-index: 0;
+}
+
+/* Titre/chiffre */
+.stats .stat .num,
+.stats .stat .stat__num {
+  /* supporte à la fois .num (ton HTML initial) et .stat__num (ma version précédente) */
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 0.25rem;
+  /* dégradé texte avec fallback */
+  color: var(--ink); /* fallback si conic-gradient non supporté */
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+@supports (background: conic-gradient(from 0deg, red, blue)) {
+  .stats .stat .num,
+  .stats .stat .stat__num {
+    background: conic-gradient(
+      from 120deg,
+      color-mix(in oklab, var(--primary) 75%, white) 0 40%,
+      color-mix(in oklab, var(--accent) 80%, white) 40% 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Libellé */
+.stats .stat .label,
+.stats .stat .stat__label {
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Sécurité anti-débordement de texte */
+.stats .stat .num,
+.stats .stat .label,
+.stats .stat .stat__num,
+.stats .stat .stat__label {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+/* Mobile: resserrer un peu */
+@media (max-width: 420px) {
+  .stats .stat {
+    border-radius: 14px;
+    padding: 1rem 0.9rem;
+  }
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.cta {
+  text-align: center;
+}
+.cta__actions {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.78rem 1.15rem;
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 10px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.06s ease, filter 0.2s ease, box-shadow 0.2s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0 -150%;
+  transform: translateX(-120%);
+  background: linear-gradient(
+    98deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 48%,
+    rgba(255, 255, 255, 0.6) 52%,
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  transition: transform 0.6s ease;
+}
+.btn:hover::after {
+  transform: translateX(40%);
+}
+.btn:hover {
+  filter: brightness(1.05);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.link {
+  display: inline-block;
+  text-decoration: underline;
+  color: var(--accent);
+  padding: 0.78rem 0.2rem;
+  position: relative;
+  padding-right: 1.1rem;
+}
+.link::after {
+  content: "↗";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.75;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.link:hover::after {
+  transform: translate(0.1rem, -50%);
+  opacity: 1;
+}
+
+/* =========================================================
+   Accessibilité : motion-safe
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  .card,
+  .chip,
+  .btn,
+  .link {
+    transition: none !important;
+  }
+  .btn::after {
+    display: none;
+  }
+}

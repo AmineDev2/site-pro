@@ -1,0 +1,208 @@
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">
+        Développeur full-stack Flask / Angular<br />
+        <span class="hero__accent"
+          >Je conçois des apps web rapides et soignées.</span
+        >
+      </h1>
+
+      <p class="hero__subtitle">
+        E-commerce (vente & location), back-office admin, intégrations API,
+        stockage S3, mailer, CI/CD et SEO.
+      </p>
+
+      <div class="hero__ctas">
+        <a mat-raised-button color="primary" routerLink="/projets"
+          >Voir mes projets</a
+        >
+        <a mat-stroked-button routerLink="/contact">Me contacter</a>
+      </div>
+
+      <div class="hero__chips">
+        <mat-chip-set>
+          <mat-chip>Python</mat-chip>
+          <mat-chip>Flask</mat-chip>
+          <mat-chip>Angular</mat-chip>
+          <mat-chip>PostgreSQL</mat-chip>
+          <mat-chip>Stripe</mat-chip>
+          <mat-chip>AWS</mat-chip>
+        </mat-chip-set>
+      </div>
+    </div>
+
+    <mat-card class="hero__card" appearance="outlined">
+      <!-- Media principale (photo) -->
+      <figure class="hero__media">
+        <img
+          src="/assets/images/hero-developer-workspace.jpg"
+          alt="Développeur web au travail avec dashboard sur écran"
+          decoding="async"
+          loading="eager"
+          width="1300"
+          height="800"
+        />
+      </figure>
+
+      <mat-card-content>
+        <p class="hero__card-text">
+          De l’idée au déploiement : cadrage, UX, développement, tests,
+          intégrations (paiement, stockage, email), monitoring et maintenance.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+<!-- SERVICES (3 cartes illustrées) -->
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Ce que je fais</h2>
+
+    <div class="cards">
+      <!-- E-commerce -->
+      <mat-card class="card" appearance="outlined">
+        <figure class="card__media">
+          <img
+            src="assets/images/service-ecommerce-laptop.jpg"
+            alt="Achat en ligne sur ordinateur portable"
+            decoding="async"
+            loading="lazy"
+            width="1200"
+            height="720"
+          />
+        </figure>
+        <mat-card-header>
+          <mat-card-title>E-commerce & location</mat-card-title>
+          <mat-card-subtitle
+            >Stripe / paniers / gestion retours</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Vente et location (caution, durée), SEO, performance, analytics.
+            Back-office admin complet.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a
+            mat-button
+            color="primary"
+            routerLink="/projets/robes-ecommerce-location"
+            >Cas “Robes”</a
+          >
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Apps & Dashboards -->
+      <mat-card class="card" appearance="outlined">
+        <figure class="card__media">
+          <img
+            src="assets/images/service-dashboard-analytics.jpg"
+            alt="Tableau de bord analytics sur écran"
+            decoding="async"
+            loading="lazy"
+            width="1200"
+            height="720"
+          />
+        </figure>
+        <mat-card-header>
+          <mat-card-title>Apps & dashboards</mat-card-title>
+          <mat-card-subtitle
+            >SaaS, portails clients, reporting</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Front Angular, API Flask, auth, rôles, fichiers, PDF, exports. Code
+            testé et maintenable.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/projets"
+            >Voir d’autres projets</a
+          >
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Intégrations & API -->
+      <mat-card class="card" appearance="outlined">
+        <figure class="card__media">
+          <img
+            src="assets/images/service-api-integration.jpg"
+            alt="Code d'API et intégrations entre services"
+            decoding="async"
+            loading="lazy"
+            width="1200"
+            height="720"
+          />
+        </figure>
+        <mat-card-header>
+          <mat-card-title>Intégrations & API</mat-card-title>
+          <mat-card-subtitle>Stripe, S3, emails, webhooks</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Conception d’API Flask, sécurité, clés/secret côté serveur, webhooks
+            fiables, files d’attente.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button color="primary" routerLink="/contact"
+            >Discuter d’une intégration</a
+          >
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title">Ma méthode</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step__num">1</div>
+        <h3 class="step__title">Cadrage</h3>
+        <p>Objectifs, KPIs, périmètre MVP, risques et planning.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">2</div>
+        <h3 class="step__title">Design & archi</h3>
+        <p>UX, composants Angular, schéma DB, contrats d’API.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">3</div>
+        <h3 class="step__title">Dev & QA</h3>
+        <p>Sprints courts, revues, tests auto & manuels, perf.</p>
+      </div>
+      <div class="step">
+        <div class="step__num">4</div>
+        <h3 class="step__title">Mise en prod</h3>
+        <p>CI/CD, observabilité, transfert & maintenance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="section">
+  <div class="container cta">
+    <div>
+      <h2 class="cta__title">Un projet en tête ?</h2>
+      <p class="cta__subtitle">
+        Je prépare une proposition claire et chiffrée sous 24h.
+      </p>
+    </div>
+    <div class="cta__actions">
+      <a mat-raised-button color="primary" routerLink="/contact"
+        >Me contacter</a
+      >
+      <a mat-stroked-button routerLink="/projets">Voir les projets</a>
+    </div>
+  </div>
+</section>

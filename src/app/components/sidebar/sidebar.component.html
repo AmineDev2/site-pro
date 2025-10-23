@@ -1,0 +1,134 @@
+<!-- Barre de titre -->
+<mat-toolbar class="sb__toolbar">
+  <a routerLink="/" class="sb__title" (click)="close()" aria-label="Accueil">
+    <mat-icon class="sb__title-icon">dashboard</mat-icon>
+    Menu
+  </a>
+</mat-toolbar>
+
+<mat-nav-list class="sb__list">
+  <mat-accordion multi>
+    <!-- Accueil -->
+    <mat-expansion-panel class="sb__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="sb__header-title">
+          <mat-icon class="sb__panel-icon">home</mat-icon>
+          <span>Accueil</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <a
+        mat-list-item
+        routerLink="/"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">info</mat-icon>
+        <span matListItemTitle>Présentation</span>
+      </a>
+    </mat-expansion-panel>
+
+    <!-- Projets -->
+    <mat-expansion-panel class="sb__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="sb__header-title">
+          <mat-icon class="sb__panel-icon">work_outline</mat-icon>
+          <span>Projets</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <a
+        mat-list-item
+        routerLink="/projets"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon"
+          >collections_bookmark</mat-icon
+        >
+        <span matListItemTitle>Tous les projets</span>
+      </a>
+    </mat-expansion-panel>
+
+    <!-- Services -->
+    <mat-expansion-panel class="sb__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="sb__header-title">
+          <mat-icon class="sb__panel-icon">apps</mat-icon>
+          <span>Services</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <a
+        mat-list-item
+        routerLink="/services/ecommerce"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">shopping_bag</mat-icon>
+        <span matListItemTitle>E-commerce</span>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/services/apps-dashboards"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">analytics</mat-icon>
+        <span matListItemTitle>Apps &amp; Dashboards</span>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/services/integrations"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">hub</mat-icon>
+        <span matListItemTitle>Intégrations &amp; API</span>
+      </a>
+    </mat-expansion-panel>
+
+    <!-- Contact -->
+    <mat-expansion-panel class="sb__panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="sb__header-title">
+          <mat-icon class="sb__panel-icon">contact_mail</mat-icon>
+          <span>Contact</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <a
+        mat-list-item
+        routerLink="/contact"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">send</mat-icon>
+        <span matListItemTitle>Contact</span>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/apropos"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">person_outline</mat-icon>
+        <span matListItemTitle>À propos</span>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/mentions-legales"
+        routerLinkActive="is-active"
+        (click)="close()"
+      >
+        <mat-icon matListItemIcon class="li-icon">gavel</mat-icon>
+        <span matListItemTitle>Mentions légales</span>
+      </a>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-nav-list>
