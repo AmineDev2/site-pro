@@ -9,112 +9,151 @@
     </header>
 
     <div class="grid">
-      <!-- Formulaire -->
-      <form
-        [formGroup]="form"
-        (ngSubmit)="submit()"
-        novalidate
-        class="card form"
-      >
-        <div class="row">
-          <mat-form-field appearance="fill" class="fld">
-            <mat-label>Nom / Société</mat-label>
-            <input
-              matInput
-              formControlName="name"
-              placeholder="Ex. Amine • Acme SAS"
-            />
-            <mat-error
-              *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
-            >
-              Indiquez votre nom (3+ caractères).
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill" class="fld">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              formControlName="email"
-              type="email"
-              placeholder="vous@domaine.fr"
-            />
-            <mat-error
-              *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
-            >
-              Email invalide.
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="row">
-          <mat-form-field appearance="fill" class="fld">
-            <mat-label>Téléphone (optionnel)</mat-label>
-            <input
-              matInput
-              formControlName="phone"
-              type="tel"
-              placeholder="+33 ..."
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="fill" class="fld">
-            <mat-label>Budget (optionnel)</mat-label>
-            <input
-              matInput
-              formControlName="budget"
-              placeholder="Fourchette ou ordre de grandeur"
-            />
-          </mat-form-field>
-        </div>
-
-        <mat-form-field appearance="fill" class="fld">
-          <mat-label>Message</mat-label>
-          <textarea
-            matInput
-            formControlName="message"
-            rows="6"
-            placeholder="Contexte, objectifs, échéance..."
-          ></textarea>
-          <mat-error
-            *ngIf="form.get('message')?.touched && form.get('message')?.invalid"
+      <!-- ======== COLONNE GAUCHE ======== -->
+      <div class="card form">
+        <!-- === Vue FORMULAIRE === -->
+        <ng-container *ngIf="mode === 'form'; else successTpl">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="submit()"
+            novalidate
+            aria-describedby="rgpd-note"
           >
-            Un petit message (10+ caractères) aide à comprendre votre besoin.
-          </mat-error>
-        </mat-form-field>
+            <div class="row">
+              <mat-form-field appearance="fill" class="fld">
+                <mat-label>Nom / Société</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  placeholder="Ex. Amine • Acme SAS"
+                  autocomplete="name"
+                  required
+                />
+                <mat-error
+                  *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+                >
+                  Indiquez votre nom (3+ caractères).
+                </mat-error>
+              </mat-form-field>
 
-        <!-- anti-spam discret -->
-        <input
-          formControlName="website"
-          class="honeypot"
-          tabindex="-1"
-          autocomplete="off"
-          aria-hidden="true"
-        />
+              <mat-form-field appearance="fill" class="fld">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  type="email"
+                  placeholder="vous@domaine.fr"
+                  autocomplete="email"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    form.get('email')?.touched && form.get('email')?.invalid
+                  "
+                >
+                  Email invalide.
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-        <div class="actions">
-          <button
-            mat-flat-button
-            color="primary"
-            [disabled]="form.invalid || loading"
-          >
-            {{ loading ? "Envoi…" : "Envoyer" }}
-          </button>
-          <span class="small"
-            >🔒 RGPD : je ne partage jamais vos coordonnées.</span
-          >
-        </div>
+            <div class="row">
+              <mat-form-field appearance="fill" class="fld">
+                <mat-label>Téléphone (optionnel)</mat-label>
+                <input
+                  matInput
+                  formControlName="phone"
+                  type="tel"
+                  placeholder="+33 ..."
+                  autocomplete="tel"
+                />
+              </mat-form-field>
 
-        <div class="alert success" *ngIf="success">
-          ✅ Merci ! Votre message a bien été envoyé.
-        </div>
-        <div class="alert error" *ngIf="error">
-          ⚠️ Oups, l’envoi a échoué. Réessayez, ou écrivez-moi directement :
-          <a href="mailto:contact@votredomaine.fr">contact@votredomaine.fr</a>
-        </div>
-      </form>
+              <mat-form-field appearance="fill" class="fld">
+                <mat-label>Budget (optionnel)</mat-label>
+                <input
+                  matInput
+                  formControlName="budget"
+                  placeholder="Fourchette ou ordre de grandeur"
+                />
+              </mat-form-field>
+            </div>
 
-      <!-- Coordonnées -->
+            <mat-form-field appearance="fill" class="fld">
+              <mat-label>Message</mat-label>
+              <textarea
+                matInput
+                formControlName="message"
+                rows="6"
+                placeholder="Contexte, objectifs, échéance..."
+                required
+              ></textarea>
+              <mat-error
+                *ngIf="
+                  form.get('message')?.touched && form.get('message')?.invalid
+                "
+              >
+                Un petit message (10+ caractères) aide à comprendre votre
+                besoin.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- anti-spam discret -->
+            <input
+              formControlName="website"
+              class="honeypot"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+
+            <div class="actions">
+              <button
+                mat-flat-button
+                color="primary"
+                [disabled]="form.invalid || loading"
+                type="submit"
+              >
+                {{ loading ? "Envoi…" : "Envoyer" }}
+              </button>
+              <span id="rgpd-note" class="small"
+                >🔒 RGPD : je ne partage jamais vos coordonnées.</span
+              >
+            </div>
+
+            <div class="alert error" *ngIf="error" aria-live="assertive">
+              ⚠️ Oups, l’envoi a échoué. Réessayez, ou écrivez-moi :
+              <a href="mailto:contact@votredomaine.fr"
+                >contact@votredomaine.fr</a
+              >
+            </div>
+          </form>
+        </ng-container>
+
+        <!-- === Vue SUCCÈS === -->
+        <ng-template #successTpl>
+          <section class="success-card" aria-live="polite">
+            <h2>✅ Demande envoyée</h2>
+            <p>
+              Merci ! Votre message a bien été reçu et sera traité sous
+              <strong>24h ouvrées</strong>.
+            </p>
+
+            <div class="progress-wrap">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="progress"
+              ></mat-progress-bar>
+              <small class="muted">Redirection vers l’accueil…</small>
+            </div>
+
+            <p class="fallback">
+              Pas de redirection ? <a routerLink="/">Retourner à l’accueil</a>
+            </p>
+          </section>
+        </ng-template>
+      </div>
+
+      <!-- ======== COLONNE DROITE (ASIDE) ======== -->
       <aside class="card aside">
         <h2>Coordonnées</h2>
         <ul class="info">

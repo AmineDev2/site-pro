@@ -1,55 +1,74 @@
 <section class="section">
   <div class="container">
-    <h1 class="section__title">Projets</h1>
+    <header class="section__head">
+      <h1 class="section__title">Projets</h1>
+      <p class="section__lead">
+        Une sélection de réalisations récentes : e-commerce, dashboards et
+        intégrations. Chaque projet met l’accent sur la performance, l’UX et la
+        maintenabilité.
+      </p>
+    </header>
+
     <div class="cards">
       <mat-card
         class="card"
         appearance="outlined"
         routerLink="/projets/ecommerce"
+        aria-label="Voir le projet E-commerce FKDress"
       >
+        <div class="card__media">
+          <img
+            src="assets/images/ecom-home-hero.jpg"
+            alt="LumiShop"
+            loading="lazy"
+          />
+        </div>
         <mat-card-header>
-          <mat-card-title>E-commerce “LumiShop”</mat-card-title>
+          <mat-card-title>E-commerce “FKDress”</mat-card-title>
           <mat-card-subtitle
-            >Boutique performante & admin simple</mat-card-subtitle
+            >Boutique performante &amp; admin simple</mat-card-subtitle
           >
         </mat-card-header>
-        <img
-          src="assets/images/lumi-home-hero.jpg"
-          alt="LumiShop"
-          loading="lazy"
-        />
       </mat-card>
 
       <mat-card
         class="card"
         appearance="outlined"
         routerLink="/projets/apps-dashboards"
+        aria-label="Voir le projet Apps et Dashboards SalesPulse"
       >
+        <div class="card__media">
+          <img
+            src="assets/images/appsdash-hero-analytics.jpg"
+            alt="SalesPulse"
+            loading="lazy"
+          />
+        </div>
         <mat-card-header>
-          <mat-card-title>Apps & Dashboards “SalesPulse”</mat-card-title>
-          <mat-card-subtitle>KPIs, filtres & exports</mat-card-subtitle>
+          <mat-card-title>Apps &amp; Dashboards “SalesPulse”</mat-card-title>
+          <mat-card-subtitle>KPIs, filtres &amp; exports</mat-card-subtitle>
         </mat-card-header>
-        <img
-          src="assets/images/appsdash-hero-analytics.jpg"
-          alt="SalesPulse"
-          loading="lazy"
-        />
       </mat-card>
 
       <mat-card
         class="card"
         appearance="outlined"
         routerLink="/projets/integrations-api"
+        aria-label="Voir le projet Intégrations et API OpsBridge"
       >
+        <div class="card__media">
+          <img
+            src="assets/images/integrations-hero-connectors.jpg"
+            alt="OpsBridge"
+            loading="lazy"
+          />
+        </div>
         <mat-card-header>
-          <mat-card-title>Intégrations & API “OpsBridge”</mat-card-title>
-          <mat-card-subtitle>Stripe, S3, webhooks & ERP/CRM</mat-card-subtitle>
+          <mat-card-title>Intégrations &amp; API “OpsBridge”</mat-card-title>
+          <mat-card-subtitle
+            >Stripe, S3, webhooks &amp; ERP/CRM</mat-card-subtitle
+          >
         </mat-card-header>
-        <img
-          src="assets/images/integrations-hero-connectors.jpg"
-          alt="OpsBridge"
-          loading="lazy"
-        />
       </mat-card>
     </div>
   </div>

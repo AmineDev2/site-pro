@@ -190,3 +190,15 @@
 button[mat-flat-button] {
   border-radius: 12px;
 }
+.success-card {
+  text-align: center;
+  padding: 28px;
+  .progress-wrap {
+    margin: 16px auto 4px;
+    max-width: 420px;
+  }
+  .fallback {
+    opacity: 0.7;
+    margin-top: 12px;
+  }
+}
