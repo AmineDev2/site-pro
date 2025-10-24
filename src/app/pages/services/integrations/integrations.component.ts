@@ -88,10 +88,11 @@ export class IntegrationsComponent {
     },
   ];
 
-  readonly plans: Plan[] = [
+  // --- PACKS INTÉGRATION (prix adaptés)
+  readonly devPlans: Plan[] = [
     {
       name: 'Starter Integration',
-      price: 'à partir de 1 400 €',
+      price: 'à partir de 990 €',
       tagline: '1 connecteur (ex. Stripe) prêt à l’emploi',
       bullets: [
         'Implémentation sécurisée',
@@ -103,11 +104,11 @@ export class IntegrationsComponent {
     },
     {
       name: 'Standard Connect',
-      price: '3 500 – 5 500 €',
+      price: '2 900 – 4 900 €',
       tagline: '2–3 connecteurs + back-office',
       bullets: [
         'Webhooks idempotents',
-        'Exports/Imports',
+        'Exports / Imports',
         'Observabilité & alertes',
       ],
       cta: 'Voir des projets',
@@ -116,7 +117,7 @@ export class IntegrationsComponent {
     },
     {
       name: 'Pro Automation',
-      price: 'sur devis',
+      price: 'sur devis (dès 6 900 €)',
       tagline: 'Workflows, files & intégrations avancées',
       bullets: [
         'Queues & retry policies',
@@ -124,6 +125,50 @@ export class IntegrationsComponent {
         'SLOs & monitoring',
       ],
       cta: 'Parler du projet',
+      link: '/contact',
+    },
+  ];
+
+  // --- FORFAITS MAINTENANCE (séparés)
+  readonly maintenancePlans: Plan[] = [
+    {
+      name: 'Maintenance Essentielle',
+      price: '49 €/mois',
+      tagline: 'Mises à jour & stabilité',
+      bullets: [
+        'Sauvegardes mensuelles',
+        'Patches sécurité mineurs',
+        'Surveillance uptime',
+        'Hotfix urgents',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+    },
+    {
+      name: 'Maintenance Pro',
+      price: '99 €/mois',
+      tagline: 'Sécurité + petites évolutions',
+      bullets: [
+        'Sauvegardes hebdomadaires',
+        'MAJ Angular/Flask régulières',
+        'Monitoring & alertes',
+        'Évolutions incluses (≤ 1h/mois)',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+      emphasized: true,
+    },
+    {
+      name: 'Maintenance Premium',
+      price: '149 €/mois',
+      tagline: 'Prioritaire & optimisation continue',
+      bullets: [
+        'Support prioritaire (≤ 24h ouvrées)',
+        'Optimisations perf/SEO trimestrielles',
+        'MAJ majeures',
+        'Évolutions (≤ 3h/mois)',
+      ],
+      cta: 'Souscrire',
       link: '/contact',
     },
   ];
@@ -147,7 +192,7 @@ export class IntegrationsComponent {
     },
     {
       q: 'Maintenance ?',
-      a: 'Support mensuel en option (49€/99€/149€) pour mises à jour, surveillance et petits correctifs.',
+      a: 'Forfaits séparés (49€/99€/149€) : mises à jour, surveillance et petits correctifs selon le niveau choisi.',
     },
   ];
 }

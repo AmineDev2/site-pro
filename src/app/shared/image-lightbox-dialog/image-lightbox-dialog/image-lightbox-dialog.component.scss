@@ -1,0 +1,41 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.lightbox__figure {
+  position: relative;
+  max-width: min(94vw, 1400px);
+  max-height: 90vh;
+  width: 100%;
+  margin: 0;
+}
+
+.lightbox__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.lightbox__caption {
+  margin-top: 0.5rem;
+  color: #eee;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}

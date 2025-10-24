@@ -1,1 +1,56 @@
-<p>projects works!</p>
+<section class="section">
+  <div class="container">
+    <h1 class="section__title">Projets</h1>
+    <div class="cards">
+      <mat-card
+        class="card"
+        appearance="outlined"
+        routerLink="/projets/ecommerce"
+      >
+        <mat-card-header>
+          <mat-card-title>E-commerce “LumiShop”</mat-card-title>
+          <mat-card-subtitle
+            >Boutique performante & admin simple</mat-card-subtitle
+          >
+        </mat-card-header>
+        <img
+          src="assets/images/lumi-home-hero.jpg"
+          alt="LumiShop"
+          loading="lazy"
+        />
+      </mat-card>
+
+      <mat-card
+        class="card"
+        appearance="outlined"
+        routerLink="/projets/apps-dashboards"
+      >
+        <mat-card-header>
+          <mat-card-title>Apps & Dashboards “SalesPulse”</mat-card-title>
+          <mat-card-subtitle>KPIs, filtres & exports</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          src="assets/images/appsdash-hero-analytics.jpg"
+          alt="SalesPulse"
+          loading="lazy"
+        />
+      </mat-card>
+
+      <mat-card
+        class="card"
+        appearance="outlined"
+        routerLink="/projets/integrations-api"
+      >
+        <mat-card-header>
+          <mat-card-title>Intégrations & API “OpsBridge”</mat-card-title>
+          <mat-card-subtitle>Stripe, S3, webhooks & ERP/CRM</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          src="assets/images/integrations-hero-connectors.jpg"
+          alt="OpsBridge"
+          loading="lazy"
+        />
+      </mat-card>
+    </div>
+  </div>
+</section>

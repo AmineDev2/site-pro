@@ -10,8 +10,8 @@ type Feature = {
 };
 type Plan = {
   name: string;
-  price: string;
   tagline: string;
+  price: string;
   bullets: string[];
   cta: string;
   link: string;
@@ -49,6 +49,11 @@ export class EcommerceComponent {
       icon: 'dashboard_customize',
       title: 'Admin simple',
       text: 'Produits, stocks, commandes, retours, exports.',
+    },
+    {
+      icon: 'devices',
+      title: 'Responsive & adaptatif',
+      text: 'Interface fluide qui s’adapte à tous les écrans, du mobile au desktop.',
     },
   ];
 
@@ -88,38 +93,107 @@ export class EcommerceComponent {
     },
   ];
 
-  readonly plans: Plan[] = [
+  // --- Forfaits Développement ---
+  readonly devPlans: Plan[] = [
     {
-      name: 'Starter',
-      price: 'à partir de 2 900€',
-      tagline: 'Vitrine + checkout Stripe',
+      name: 'Vitrine léger',
+      tagline: 'Idéal micro-entreprise / projet perso',
+      price: 'à partir de 590 €',
       bullets: [
-        'Produits simples',
-        'Pages essentielles',
-        'Déploiement & formation',
+        '1 à 3 pages (Accueil, Services, Contact)',
+        'Design responsive mobile/tablette',
+        'Formulaire de contact',
+        'SEO de base (titres, métas)',
+        'Mise en ligne incluse',
       ],
       cta: 'Demander un devis',
       link: '/contact',
     },
     {
-      name: 'Boutique',
-      price: '6 900 – 12 000€',
-      tagline: 'Catalogue complet & back-office',
-      bullets: ['Variantes & promos', 'Stocks & commandes', 'SEO & analytics'],
-      cta: 'Voir des projets',
-      link: '/projets',
+      name: 'Vitrine Pro',
+      tagline: 'Image soignée + contenu évolutif',
+      price: 'à partir de 1 290 €',
+      bullets: [
+        'Jusqu’à 8 pages + Blog/Actus',
+        'Performance & Core Web Vitals verts',
+        'SEO on-page + données structurées',
+        'Google Analytics / Search Console',
+        'Support 1 mois inclus',
+      ],
+      cta: 'Demander un devis',
+      link: '/contact',
       emphasized: true,
     },
     {
-      name: 'Pro Location',
-      price: 'sur devis',
-      tagline: 'Caution, retours, workflow',
+      name: 'E-commerce Starter',
+      tagline: 'Vendre en ligne simplement',
+      price: 'à partir de 2 490 €',
       bullets: [
-        'Caution & contrats',
-        'Retours & avoirs',
-        'Intégrations avancées',
+        'Catalogue ≤ 100 produits',
+        'Paiement Stripe (3D Secure)',
+        'Gestion commandes & stocks',
+        'Emails transactionnels',
+        'RGPD & sécurité de base',
+      ],
+      cta: 'Demander un devis',
+      link: '/contact',
+    },
+    {
+      name: 'E-commerce Pro',
+      tagline: 'Sur-mesure, prêt pour la croissance',
+      price: 'à partir de 5 990 €',
+      bullets: [
+        'Catalogue étendu, variantes & promos',
+        'Intégrations (transport, ERP/CRM)',
+        'Tableau de bord admin personnalisé',
+        'Optimisation performance & SEO',
+        'Recette, tests & déploiement pro',
       ],
       cta: 'Parler du projet',
+      link: '/contact',
+    },
+  ];
+
+  // --- Forfaits Maintenance ---
+  readonly maintenancePlans: Plan[] = [
+    {
+      name: 'Maintenance Essentielle',
+      tagline: 'Pour garder le site stable et à jour',
+      price: '49 €/mois',
+      bullets: [
+        'Sauvegardes mensuelles',
+        'Mises à jour mineures (Angular, Flask)',
+        'Surveillance uptime',
+        'Corrections de bugs urgents',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+    },
+    {
+      name: 'Maintenance Pro',
+      tagline: 'Sécurité, performances et suivi continu',
+      price: '99 €/mois',
+      bullets: [
+        'Sauvegardes hebdomadaires',
+        'Mises à jour techniques & sécurité',
+        'Monitoring & alertes de disponibilité',
+        'Petites évolutions incluses (≤ 1h/mois)',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+      emphasized: true,
+    },
+    {
+      name: 'Maintenance Premium',
+      tagline: 'Assistance prioritaire & évolutions régulières',
+      price: '199 €/mois',
+      bullets: [
+        'Support prioritaire (sous 24h)',
+        'Optimisations SEO & performance trimestrielles',
+        'Mises à jour Angular/Flask majeures',
+        'Évolutions fonctionnelles (≤ 3h/mois)',
+      ],
+      cta: 'Souscrire',
       link: '/contact',
     },
   ];

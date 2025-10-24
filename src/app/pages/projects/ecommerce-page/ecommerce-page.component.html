@@ -1,0 +1,126 @@
+<!-- HERO -->
+<section class="hero hero--compact">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1 class="hero__title">{{ hero.title }}</h1>
+      <p class="hero__subtitle">{{ hero.subtitle }}</p>
+
+      <!-- Value props -->
+      <div class="vprops-grid">
+        <mat-card
+          class="vprop-card"
+          appearance="outlined"
+          *ngFor="let v of valueProps"
+        >
+          <mat-icon class="vprop-card__icon" color="primary">{{
+            v.icon
+          }}</mat-icon>
+          <div class="vprop-card__body">
+            <h3 class="vprop-card__title">{{ v.title }}</h3>
+            <p class="vprop-card__text">{{ v.text }}</p>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <mat-card class="hero__card hero__card--compact" appearance="outlined">
+      <figure
+        class="media media--hero media--thumb-lg clickable-img"
+        (click)="openImage(hero.img, hero.alt, hero.title)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="openImage(hero.img, hero.alt, hero.title)"
+        (keydown.space)="openImage(hero.img, hero.alt, hero.title)"
+      >
+        <img
+          [src]="hero.img"
+          [alt]="hero.alt"
+          width="1000"
+          height="620"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+      <mat-card-content>
+        <p class="hero__note">
+          Performances, SEO et paiement sécurisé intégrés.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+<!-- DÉCOUPAGE DU TRAVAIL (tout visible) -->
+<section class="section section--compact">
+  <div class="container">
+    <h2 class="section__title">Découpage du travail</h2>
+
+    <div class="work-grid">
+      <article class="work-card" *ngFor="let w of work">
+        <header class="work-card__header">
+          <!-- ✅ clic sur le CONTENEUR image (overlay ne bloque pas) -->
+          <div
+            class="work-card__image clickable-img"
+            (click)="openImage(w.img, w.alt, w.title)"
+            role="button"
+            tabindex="0"
+            (keydown.enter)="openImage(w.img, w.alt, w.title)"
+            (keydown.space)="openImage(w.img, w.alt, w.title)"
+          >
+            <img [src]="w.img" [alt]="w.alt" loading="lazy" decoding="async" />
+            <div class="work-card__overlay">
+              <div class="work-card__icon">
+                <mat-icon>{{ w.icon }}</mat-icon>
+              </div>
+              <h3 class="work-card__title">{{ w.title }}</h3>
+              <p class="work-card__desc">{{ w.desc }}</p>
+            </div>
+          </div>
+        </header>
+
+        <div class="work-card__details">
+          <ul>
+            <li *ngFor="let b of w.bullets">{{ b }}</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- APERÇUS -->
+<section class="section section--compact">
+  <div class="container">
+    <h2 class="section__title">Aperçus</h2>
+    <div class="gallery gallery--compact">
+      <figure class="gallery__item" *ngFor="let g of gallery">
+        <img
+          [src]="g.src"
+          [alt]="g.alt"
+          width="640"
+          height="480"
+          loading="lazy"
+          decoding="async"
+          class="clickable-img"
+          (click)="openImage(g.src, g.alt, g.caption)"
+        />
+        <figcaption class="gallery__caption">{{ g.caption }}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--alt section--compact">
+  <div class="container">
+    <h2 class="section__title">FAQ</h2>
+    <mat-accordion class="faq" multi>
+      <mat-expansion-panel *ngFor="let f of faq">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ f.q }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{ f.a }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>

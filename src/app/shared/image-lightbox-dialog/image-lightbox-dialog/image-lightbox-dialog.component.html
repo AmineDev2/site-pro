@@ -1,0 +1,22 @@
+<div
+  class="lightbox"
+  (click)="dialogRef.close()"
+  role="dialog"
+  aria-modal="true"
+>
+  <figure class="lightbox__figure" (click)="$event.stopPropagation()">
+    <img [src]="data.src" [alt]="data.alt || ''" />
+    <figcaption class="lightbox__caption" *ngIf="data.caption || data.alt">
+      {{ data.caption || data.alt }}
+    </figcaption>
+
+    <button
+      mat-icon-button
+      class="lightbox__close"
+      aria-label="Fermer"
+      (click)="dialogRef.close()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </figure>
+</div>

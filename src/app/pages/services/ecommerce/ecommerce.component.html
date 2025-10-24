@@ -109,16 +109,16 @@
   </div>
 </section>
 
-<!-- PLANS -->
+<!-- FORFAITS DÉVELOPPEMENT -->
 <section class="section">
   <div class="container">
-    <h2 class="section__title">Forfaits</h2>
+    <h2 class="section__title">Forfaits Développement</h2>
     <div class="plans">
       <mat-card
         class="plan"
         [class.plan--emph]="p.emphasized"
         appearance="outlined"
-        *ngFor="let p of plans"
+        *ngFor="let p of devPlans"
       >
         <mat-card-header>
           <mat-card-title>{{ p.name }}</mat-card-title>
@@ -131,10 +131,36 @@
           </ul>
         </mat-card-content>
         <mat-card-actions>
-          <a mat-stroked-button color="primary" [routerLink]="p.link">{{
-            p.cta
-          }}</a>
+          <a mat-stroked-button color="primary" [routerLink]="p.link">
+            {{ p.cta }}
+          </a>
         </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- FORFAITS MAINTENANCE -->
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Forfaits Maintenance</h2>
+    <div class="plans">
+      <mat-card
+        class="plan"
+        [class.plan--emph]="p.emphasized"
+        appearance="outlined"
+        *ngFor="let p of maintenancePlans"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ p.name }}</mat-card-title>
+          <mat-card-subtitle>{{ p.tagline }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="plan__price">{{ p.price }}</div>
+          <ul class="list">
+            <li *ngFor="let b of p.bullets">{{ b }}</li>
+          </ul>
+        </mat-card-content>
       </mat-card>
     </div>
   </div>

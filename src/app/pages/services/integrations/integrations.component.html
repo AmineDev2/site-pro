@@ -72,7 +72,7 @@
   </div>
 </section>
 
-<!-- PLANS -->
+<!-- PACKS D’INTÉGRATION (DEV) -->
 <section class="section">
   <div class="container">
     <h2 class="section__title">Packs d’intégration</h2>
@@ -81,7 +81,38 @@
         class="plan"
         [class.plan--emph]="p.emphasized"
         appearance="outlined"
-        *ngFor="let p of plans"
+        *ngFor="let p of devPlans"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ p.name }}</mat-card-title>
+          <mat-card-subtitle>{{ p.tagline }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="plan__price">{{ p.price }}</div>
+          <ul class="list">
+            <li *ngFor="let b of p.bullets">{{ b }}</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-stroked-button color="primary" [routerLink]="p.link">{{
+            p.cta
+          }}</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- FORFAITS MAINTENANCE -->
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">Forfaits Maintenance</h2>
+    <div class="plans">
+      <mat-card
+        class="plan"
+        [class.plan--emph]="p.emphasized"
+        appearance="outlined"
+        *ngFor="let p of maintenancePlans"
       >
         <mat-card-header>
           <mat-card-title>{{ p.name }}</mat-card-title>
@@ -115,5 +146,23 @@
         <p>{{ f.a }}</p>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container cta">
+    <div>
+      <h2 class="cta__title">Un projet integrations&nbsp;?</h2>
+      <p class="cta__subtitle">
+        Je prépare une proposition claire et chiffrée sous 24 h.
+      </p>
+    </div>
+    <div class="cta__actions">
+      <a mat-raised-button color="primary" routerLink="/contact"
+        >Me contacter</a
+      >
+      <a mat-stroked-button routerLink="/projets">Voir des projets</a>
+    </div>
   </div>
 </section>

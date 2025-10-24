@@ -84,11 +84,11 @@ export class AppsDashboardsComponent {
     },
   ];
 
-  // --- Packs (tarifs attractifs)
-  readonly plans: Plan[] = [
+  // --- Packs Développement (prix adaptés)
+  readonly devPlans: Plan[] = [
     {
       name: 'Starter Dashboard',
-      price: 'à partir de 2 200 €',
+      price: 'à partir de 1 490 €',
       tagline: 'Tableau de bord clé en main',
       bullets: [
         'KPIs essentiels',
@@ -100,7 +100,7 @@ export class AppsDashboardsComponent {
     },
     {
       name: 'Standard SaaS',
-      price: '4 900 – 7 900 €',
+      price: '3 900 – 6 900 €',
       tagline: 'Portail client + rôles',
       bullets: [
         'Auth & permissions',
@@ -113,7 +113,7 @@ export class AppsDashboardsComponent {
     },
     {
       name: 'Pro Data',
-      price: 'sur devis',
+      price: 'sur devis (dès 7 900 €)',
       tagline: 'Temps réel & intégrations',
       bullets: [
         'Webhooks & files d’attente',
@@ -121,6 +121,50 @@ export class AppsDashboardsComponent {
         'Connecteurs ERP/CRM',
       ],
       cta: 'Parler du projet',
+      link: '/contact',
+    },
+  ];
+
+  // --- Forfaits Maintenance (séparés)
+  readonly maintenancePlans: Plan[] = [
+    {
+      name: 'Maintenance Essentielle',
+      price: '49 €/mois',
+      tagline: 'Stabilité & mises à jour de base',
+      bullets: [
+        'Sauvegardes mensuelles',
+        'Patches sécurité mineurs',
+        'Surveillance uptime',
+        'Hotfix urgents',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+    },
+    {
+      name: 'Maintenance Pro',
+      price: '99 €/mois',
+      tagline: 'Sécurité + petites évolutions',
+      bullets: [
+        'Sauvegardes hebdomadaires',
+        'Mises à jour Angular/Flask régulières',
+        'Monitoring & alertes',
+        'Évolutions incluses (≤ 1h/mois)',
+      ],
+      cta: 'Souscrire',
+      link: '/contact',
+      emphasized: true,
+    },
+    {
+      name: 'Maintenance Premium',
+      price: '149 €/mois',
+      tagline: 'Prioritaire & optimisations',
+      bullets: [
+        'Support prioritaire (≤ 24h ouvrées)',
+        'Optimisations perf/SEO trimestrielles',
+        'Mises à jour majeures',
+        'Évolutions incluses (≤ 3h/mois)',
+      ],
+      cta: 'Souscrire',
       link: '/contact',
     },
   ];
@@ -145,7 +189,7 @@ export class AppsDashboardsComponent {
     },
     {
       q: 'Hébergement & maintenance ?',
-      a: 'Hébergement sur votre compte (AWS/GCP/OVH) ou le vôtre. Support mensuel en option (49€/99€/149€ selon niveau).',
+      a: 'Hébergement sur votre compte (AWS/GCP/OVH). Forfaits de maintenance : 49€/99€/149€ selon le niveau de service.',
     },
   ];
 }
