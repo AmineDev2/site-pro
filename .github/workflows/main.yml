@@ -2,10 +2,15 @@ name: Deploy Angular to GitHub Pages
 
 on:
   push:
-    branches: [master]
+    branches: [master]        # Déploie à chaque push sur master
+  workflow_dispatch: {}        # Permet de lancer manuellement depuis l'onglet Actions
 
 permissions:
-  contents: write
+  contents: write              # Autorise le push sur la branche gh-pages
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true     # Evite les déploiements simultanés
 
 jobs:
   build-deploy:
@@ -24,17 +29,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Angular CLI
-        run: npm i -g @angular/cli
+      # Utilise ng via npx pour éviter les soucis de version globale
+      - name: Build Angular (prod)
+        run: npx ng build --configuration production --base-href "/"
 
-      - name: Build Angular app
-        run: ng build --configuration production --base-href "/"
-
-      - name: Get build directory
+      # Ton outputPath = dist/site-pro (d'après angular.json)
+      - name: Resolve build directory
         id: dist
         run: echo "DIR=dist/site-pro" >> $GITHUB_OUTPUT
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
