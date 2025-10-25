@@ -34,11 +34,11 @@ const routes: Routes = [
     component: AppsDashboardsPageComponent,
     title: 'Projet · Apps & Dashboards « SalesPulse »',
   },
-  {
-    path: 'projets/integrations-api',
-    component: IntegrationsPageComponent,
-    title: 'Projet · Intégrations & API « OpsBridge »',
-  },
+  // {
+  //   path: 'projets/integrations-api',
+  //   component: IntegrationsPageComponent,
+  //   title: 'Projet · Intégrations & API « OpsBridge »',
+  // },
 
   // Services
   {
