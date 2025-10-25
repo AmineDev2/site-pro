@@ -93,3 +93,28 @@ mat-sidenav,
     min-height: calc(100vh - 56px - 56px);
   }
 }
+/* Header fixé */
+.topbar,
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; /* width: 100% marche aussi */
+  z-index: 1100;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  /* Si tu utilises mat-toolbar:
+     height: 64px; (ou 56px sur mobile), sinon adapte */
+}
+
+/* Décaler le contenu sous le header (adapte la valeur à la vraie hauteur) */
+.main-content {
+  padding: 24px 16px;
+  margin-top: 64px; /* = hauteur du header (desktop) */
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    margin-top: 56px; /* = hauteur du header (mobile) */
+  }
+}
