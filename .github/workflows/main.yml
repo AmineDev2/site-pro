@@ -1,0 +1,37 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm i -g @angular/cli
+
+      # Domaine perso => base-href à la racine
+      - run: ng build --configuration production --base-href "/"
+
+      # Trouver automatiquement le dossier dist (Angular 17 => souvent dist/<app>/browser)
+      - id: dist
+        run: |
+          echo "DIR=$(ls -d dist/*/browser 2>/dev/null || ls -d dist/* 2>/dev/null | head -n 1)" >> $GITHUB_OUTPUT
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ steps.dist.outputs.DIR }}
+          cname: aminedev.fr
