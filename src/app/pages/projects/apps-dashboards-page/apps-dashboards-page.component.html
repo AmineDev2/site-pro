@@ -1,11 +1,14 @@
 <!-- HERO -->
 <section class="hero hero--compact">
   <div class="container hero__inner">
-    <div class="hero__copy">
+    <!-- HEADER CENTRÉ AU-DESSUS -->
+    <header class="hero__header">
       <h1 class="hero__title">{{ hero.title }}</h1>
       <p class="hero__subtitle">{{ hero.subtitle }}</p>
+    </header>
 
-      <!-- Value props -->
+    <!-- GAUCHE : value props -->
+    <div class="hero__copy">
       <div class="vprops-grid">
         <mat-card
           class="vprop-card"
@@ -23,13 +26,22 @@
       </div>
     </div>
 
+    <!-- DROITE : image dans une mat-card -->
     <mat-card class="hero__card hero__card--compact" appearance="outlined">
-      <figure class="media media--hero media--thumb-lg">
+      <figure
+        class="media media--hero clickable-img"
+        (click)="openImage(hero.img, hero.alt, hero.title)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="openImage(hero.img, hero.alt, hero.title)"
+        (keydown.space)="openImage(hero.img, hero.alt, hero.title)"
+        aria-label="Agrandir l’aperçu du dashboard"
+      >
         <img
           [src]="hero.img"
           [alt]="hero.alt"
-          width="1000"
-          height="620"
+          width="1200"
+          height="720"
           loading="eager"
           decoding="async"
         />
@@ -49,20 +61,18 @@
     <h2 class="section__title">Découpage du travail</h2>
 
     <div class="work-grid">
-      <article
-        (click)="openImage(w.img, w.alt, w.title)"
-        class="work-card"
-        *ngFor="let w of work"
-      >
+      <article class="work-card" *ngFor="let w of work">
         <header class="work-card__header">
-          <div class="work-card__image">
-            <img
-              [src]="w.img"
-              [alt]="w.alt"
-              loading="lazy"
-              decoding="async"
-              class="clickable-img"
-            />
+          <!-- clic sur le conteneur image (overlay ne bloque pas) -->
+          <div
+            class="work-card__image clickable-img"
+            (click)="openImage(w.img, w.alt, w.title)"
+            role="button"
+            tabindex="0"
+            (keydown.enter)="openImage(w.img, w.alt, w.title)"
+            (keydown.space)="openImage(w.img, w.alt, w.title)"
+          >
+            <img [src]="w.img" [alt]="w.alt" loading="lazy" decoding="async" />
             <div class="work-card__overlay">
               <div class="work-card__icon">
                 <mat-icon>{{ w.icon }}</mat-icon>
