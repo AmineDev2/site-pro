@@ -51,11 +51,11 @@ const routes: Routes = [
     component: AppsDashboardsComponent,
     title: 'Services · Apps & Dashboards',
   },
-  {
-    path: 'services/integrations',
-    component: IntegrationsComponent,
-    title: 'Services · Intégrations & API',
-  },
+  // {
+  //   path: 'services/integrations',
+  //   component: IntegrationsComponent,
+  //   title: 'Services · Intégrations & API',
+  // },
 
   // Contact / À propos / Légal
   { path: 'contact', component: ContactComponent, title: 'Contact' },

@@ -1,17 +1,51 @@
+/* =======================================================================
+   THEME GLOBAL — Manrope partout + Boutons très arrondis + Fix images
+   - Conserve Material + contraste (plus de gris pâle)
+   - Boutons en pilule (radius max) + hover/active doux
+   - Images dans les cartes corrigées (cover, pas d'écrasement, coins arrondis)
+   - Ne touche pas header / sidebar
+======================================================================= */
+
 /* DOIT être en tout premier */
 @use "@angular/material" as mat;
 
 /* 1) Core */
 @include mat.core();
 
-/* 2) Palettes sobres (zéro bleu) */
+/* 2) Palettes */
 $primary: mat.define-palette(mat.$cyan-palette, 500, 300, 700);
-// accent conservé
 $accent: mat.define-palette(mat.$deep-orange-palette, A200);
-
 $warn: mat.define-palette(mat.$red-palette);
 
-/* 3) Thème clair (API v16.2 “classique”: accent/warn) */
+/* 2.1) Police unique : Manrope (moderne & lisible) */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+$font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, sans-serif;
+
+/* 2.2) Typographie Material 100% Manrope */
+$typography: mat.define-typography-config(
+  $font-family: $font-sans,
+  $headline-1:
+    mat.define-typography-level(clamp(40px, 6vw, 62px), 1.05, 800, $font-sans),
+  $headline-2:
+    mat.define-typography-level(clamp(28px, 4.5vw, 42px), 1.1, 700, $font-sans),
+  $headline-3:
+    mat.define-typography-level(clamp(22px, 3.5vw, 32px), 1.15, 700, $font-sans),
+  $headline-4:
+    mat.define-typography-level(clamp(20px, 3vw, 26px), 1.2, 700, $font-sans),
+  $headline-5: mat.define-typography-level(20px, 1.25, 700, $font-sans),
+  $headline-6: mat.define-typography-level(18px, 1.25, 700, $font-sans),
+  $subtitle-1: mat.define-typography-level(16px, 1.55, 600, $font-sans),
+  $subtitle-2: mat.define-typography-level(14px, 1.45, 700, $font-sans),
+  $body-1: mat.define-typography-level(16px, 1.74, 400, $font-sans),
+  $body-2: mat.define-typography-level(14px, 1.65, 400, $font-sans),
+  $button: mat.define-typography-level(14px, 1, 800, $font-sans),
+  $caption: mat.define-typography-level(12px, 1.4, 500, $font-sans),
+  $overline: mat.define-typography-level(11px, 1.2, 700, $font-sans),
+);
+
+/* 3) Thème clair Material */
 $theme: mat.define-light-theme(
   (
     color: (
@@ -19,41 +53,426 @@ $theme: mat.define-light-theme(
       accent: $accent,
       warn: $warn,
     ),
-    typography: mat.define-typography-config(),
+    typography: $typography,
     density: 0,
   )
 );
 
-/* 4) Appliquer le thème à TOUS les composants */
+/* 4) Appliquer le thème à tous les composants */
 @include mat.all-component-themes($theme);
 
-/* 5) Variables utilitaires pour ton propre CSS */
+/* 5) Variables utilitaires */
 :root {
   --app-primary: #{mat.get-color-from-palette($primary, 600)};
+  --app-primary-50: #{mat.get-color-from-palette($primary, 50)};
+  --app-primary-100: #{mat.get-color-from-palette($primary, 100)};
   --app-accent: #{mat.get-color-from-palette($accent)};
+  --app-warn: #{mat.get-color-from-palette($warn, 600)};
+
+  --app-bg: #0f0f12;
+  --app-surface: #17171c;
+  --app-surface-2: #1e1e25;
+  --app-border: #272732;
+
+  /* Texte contrasté (pas de gris pâle) */
+  --app-text: #f6f7fb;
+  --app-muted: #e7eaf2;
+
+  /* Variantes pour fond clair */
+  --on-light-text: #22252b;
+  --on-light-muted: #555b64;
+
+  /* Texte sur image */
+  --on-image: #ffffff;
+  --on-image-strong: #ffffff;
+  --on-image-muted: rgba(255, 255, 255, 0.95);
+
+  /* Boutons arrondis */
+  --btn-radius: 9999px; /* pilule */
+  --btn-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+  --btn-shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.22);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --shadow-1: 0 8px 24px rgba(0, 0, 0, 0.18);
+  --shadow-2: 0 14px 40px rgba(0, 0, 0, 0.24);
+  --easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --fast: 150ms;
+  --normal: 240ms;
+  --slow: 420ms;
+  --font-sans: #{$font-sans};
 }
 
-/* --- TON CSS applicatif seulement après --- */
-/* ex. */
+/* ==== RESET & BASE ====================================================== */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  letter-spacing: 0.005em;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+div,
+small,
+strong,
+em,
+button,
+input,
+select,
+textarea,
+label,
+.mdc-typography,
+.mat-mdc-button,
+.mat-mdc-form-field,
+.mat-mdc-select,
+.mat-mdc-card,
+.mat-mdc-menu-item,
+.mat-mdc-tooltip,
+.mat-mdc-table {
+  font-family: var(--font-sans) !important;
+}
+
+mat-icon {
+  font-family: "Material Icons" !important;
+}
+
+::selection {
+  background: var(--app-primary-100);
+  color: #0c0c0f;
+}
+:focus-visible {
+  outline: 3px solid var(--app-primary);
+  outline-offset: 2px;
+  transition: outline var(--fast) var(--easing);
+}
+
+a {
+  color: var(--app-primary);
+  text-decoration: none;
+  transition: color var(--fast) var(--easing), opacity var(--fast) var(--easing);
+}
+a:hover {
+  opacity: 0.9;
+}
+
+main,
+.content,
+.app-content {
+  padding: clamp(16px, 2vw, 28px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    transparent 200px
+  );
+}
+
+.container {
+  width: min(1120px, 92vw);
+  margin-inline: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.08;
+}
+h2 {
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.12;
+}
+h3 {
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.18;
+}
+h4 {
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 1rem;
+  color: inherit;
+  font-weight: 400;
+}
+
+/* ==== Contextes de contraste =========================================== */
+.on-light,
+.on-light p,
+.on-light span,
+.on-light li,
+.on-light a {
+  color: var(--on-light-text) !important;
+}
+.on-light .muted,
+.on-light .subtitle,
+.on-light .mat-card-subtitle,
+.on-light .mdc-typography--body2,
+.on-light .mdc-typography--caption,
+.on-light .mat-mdc-list-item__secondary-text {
+  color: var(--on-light-muted) !important;
+  opacity: 1 !important;
+}
+
+.on-image,
+[data-on-image="true"] {
+  color: var(--on-image) !important;
+}
+.on-image h1,
+.on-image h2,
+.on-image h3,
+.on-image h4 {
+  color: var(--on-image-strong) !important;
+}
+.on-image p,
+.on-image .muted,
+.on-image .subtitle,
+.on-image .mat-card-subtitle,
+.on-image .mdc-typography--body2,
+.on-image .mdc-typography--caption,
+.on-image .mat-mdc-list-item__secondary-text {
+  color: var(--on-image-muted) !important;
+  opacity: 1 !important;
+}
+
+/* ==== Surfaces & cartes ================================================= */
+.card,
+.panel,
+.mat-mdc-card {
+  background: radial-gradient(
+      1200px 800px at 10% -20%,
+      rgba(255, 255, 255, 0.045),
+      transparent 60%
+    ),
+    var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: clamp(16px, 2.2vw, 24px);
+  transition: transform var(--normal) var(--easing),
+    box-shadow var(--normal) var(--easing),
+    border-color var(--fast) var(--easing);
+  color: inherit;
+}
+.card:hover,
+.panel:hover,
+.mat-mdc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+  border-color: var(--app-primary-100);
+}
+
+/* ==== FIX IMAGES DANS LES CARTES ======================================= */
+/* Empêche l'image de s'étirer/écraser, couvre le cadre et arrondit les coins */
+img[mat-card-image],
+.mat-mdc-card img,
+.card img,
+.panel img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  object-fit: cover;
+  overflow: hidden;
+}
+/* Si une hauteur fixe est imposée ailleurs, on garde le cover propre */
+.mat-mdc-card .media,
+.card .media {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.mat-mdc-card .media > img,
+.card .media > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Option ratio : ajouter .ratio-16x9 autour de l'image pour un cadre propre */
+.ratio-16x9 {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.ratio-16x9 > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==== BOUTONS PILULES =================================================== */
+.mdc-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  border-radius: var(--btn-radius) !important;
+  font-weight: 800;
+  letter-spacing: 0.005em;
+}
+/* Filled/raised */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  box-shadow: var(--btn-shadow);
+  transition: transform var(--fast) var(--easing),
+    box-shadow var(--normal) var(--easing),
+    background-color var(--fast) var(--easing);
+  padding-inline: 18px;
+  min-height: 40px;
+}
+.mat-mdc-raised-button:hover,
+.mat-mdc-unelevated-button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--btn-shadow-hover);
+}
+.mat-mdc-raised-button:active,
+.mat-mdc-unelevated-button:active {
+  transform: translateY(0);
+}
+
+/* Outlined */
+.mat-mdc-outlined-button {
+  border-radius: var(--btn-radius) !important;
+  padding-inline: 18px;
+  min-height: 40px;
+  transition: background-color var(--fast) var(--easing),
+    border-color var(--fast) var(--easing);
+}
+.mat-mdc-outlined-button:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Boutons utilitaires */
+.btn-lg .mdc-button__label,
+.mat-mdc-button.btn-lg .mdc-button__label {
+  font-size: 1rem;
+}
+.btn-lg {
+  min-height: 48px;
+  padding-inline: 22px;
+  border-radius: var(--btn-radius) !important;
+}
+.btn-sm {
+  min-height: 32px;
+  padding-inline: 14px;
+  border-radius: var(--btn-radius) !important;
+}
+
+/* ==== Correctifs Material (jamais pâles) ================================ */
+.mdc-typography--body2,
+.mdc-typography--caption,
+.mat-mdc-card-subtitle,
+.mat-card-subtitle,
+.mat-mdc-list-item__secondary-text,
+.mdc-theme--text-secondary-on-background {
+  color: var(--on-light-muted) !important;
+  opacity: 1 !important;
+}
+
+/* ==== Champs ============================================================ */
+.mdc-text-field,
+.mat-mdc-form-field {
+  --mdc-shape-small: 16px;
+  border-radius: 16px;
+}
+.mat-mdc-form-field .mdc-floating-label,
+.mat-mdc-form-field .mdc-text-field__input::placeholder {
+  color: var(--on-light-muted) !important;
+  opacity: 1 !important;
+}
+
+/* ==== Accents =========================================================== */
 .hero__accent {
   color: var(--app-primary);
 }
 .step__num {
   background: var(--app-primary);
+  color: #0b0b0e;
+  border-radius: 12px;
+  padding: 0.25rem 0.6rem;
+}
+/* ===== Italique pour les paragraphes explicatifs ===== */
+
+/* Paragraphe dans les mat-card (contenu explicatif) */
+.mat-mdc-card .mat-mdc-card-content p,
+.mat-mdc-card mat-card-content p,
+mat-card .mat-mdc-card-content p,
+mat-card mat-card-content p {
+  font-style: italic;
 }
 
-/* Si tu utilises Tailwind, mets-le APRÈS (sinon erreur @use) */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
-/* You can add global styles to this file, and also import other style files */
-
-html,
-body {
-  height: 100%;
+/* Sous-texte explicatif de tes cartes “value props” */
+.vprop-card__text {
+  font-style: italic;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+/* Légendes / notes sous les images */
+.hero__note,
+.gallery__caption {
+  font-style: italic;
+}
+
+/* Descriptions dans les “work cards” (overlay) */
+.work-card__desc {
+  font-style: italic;
+}
+
+/* Utilitaires : forcer / empêcher l’italique au besoin */
+.is-italic {
+  font-style: italic !important;
+}
+.no-italic {
+  font-style: normal !important;
+}
+
+/* Sécurité : ne JAMAIS mettre les titres en italique */
+.mat-mdc-card-title,
+mat-card-title,
+.vprop-card__title,
+.work-card__title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal !important;
 }

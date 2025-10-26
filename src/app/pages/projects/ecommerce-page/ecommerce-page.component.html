@@ -1,11 +1,14 @@
 <!-- HERO -->
 <section class="hero hero--compact">
   <div class="container hero__inner">
-    <div class="hero__copy">
+    <!-- HEADER CENTRÉ AU-DESSUS -->
+    <header class="hero__header">
       <h1 class="hero__title">{{ hero.title }}</h1>
       <p class="hero__subtitle">{{ hero.subtitle }}</p>
+    </header>
 
-      <!-- Value props -->
+    <!-- GAUCHE : value props -->
+    <div class="hero__copy">
       <div class="vprops-grid">
         <mat-card
           class="vprop-card"
@@ -23,20 +26,22 @@
       </div>
     </div>
 
+    <!-- DROITE : image dans une mat-card -->
     <mat-card class="hero__card hero__card--compact" appearance="outlined">
       <figure
-        class="media media--hero media--thumb-lg clickable-img"
+        class="media media--hero clickable-img"
         (click)="openImage(hero.img, hero.alt, hero.title)"
         role="button"
         tabindex="0"
         (keydown.enter)="openImage(hero.img, hero.alt, hero.title)"
         (keydown.space)="openImage(hero.img, hero.alt, hero.title)"
+        aria-label="Agrandir l’aperçu du projet"
       >
         <img
           [src]="hero.img"
           [alt]="hero.alt"
-          width="1000"
-          height="620"
+          width="1200"
+          height="720"
           loading="eager"
           decoding="async"
         />

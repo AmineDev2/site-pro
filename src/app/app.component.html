@@ -1,6 +1,14 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Menu latéral -->
-  <mat-sidenav #sidenav class="sidenav" mode="over" [autoFocus]="false">
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    mode="over"
+    [autoFocus]="false"
+    [fixedInViewport]="true"
+    [fixedTopGap]="0"
+    [fixedBottomGap]="0"
+  >
     <app-sidebar (closeSidenav)="onCloseSidenav()"></app-sidebar>
   </mat-sidenav>
 
@@ -13,7 +21,16 @@
     </div>
 
     <footer class="footer">
-      © {{ year }} AmineDev — Tous droits réservés.
+      <div class="footer__inner container">
+        <span>© {{ year }} AmineDev — Tous droits réservés.</span>
+        <a
+          class="footer__link"
+          routerLink="/mentions-legales"
+          aria-label="Mentions légales"
+        >
+          Mentions légales
+        </a>
+      </div>
     </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

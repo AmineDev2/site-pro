@@ -183,3 +183,34 @@ mat-sidenav,
     word-break: break-word;
   }
 }
+/* ===== Fix : menu (sidenav) collé tout en haut de la page ===== */
+
+/* Conteneur principal du menu */
+.sidenav,
+mat-sidenav,
+.mat-drawer {
+  top: 0 !important; /* colle le haut */
+  position: fixed !important; /* fixe par rapport à la fenêtre */
+  left: 0;
+  height: 100vh !important; /* prend toute la hauteur visible */
+  max-height: 100vh;
+  margin: 0;
+  border-top: none;
+  z-index: 1200; /* au-dessus du contenu principal */
+}
+
+/* L’intérieur (scrollable) garde son comportement normal */
+::ng-deep .mat-drawer-inner-container {
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-top: 0;
+}
+
+/* Optionnel : si le header est fixed, on empêche un décalage */
+mat-sidenav-container,
+.mat-drawer-container {
+  position: relative;
+  overflow: visible;
+}

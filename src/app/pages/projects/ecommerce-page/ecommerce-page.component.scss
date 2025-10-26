@@ -1,12 +1,45 @@
-/* ======= Compact & élégant ======= */
-.section--compact {
-  padding: 2rem 0;
+/* ======= Compact & élégant (revamped) ======= */
+
+/* Layout : cartes à gauche, image à droite */
+.hero .hero__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: start;
 }
+
+/* Colonne gauche (texte + value props) */
+.hero__copy {
+  order: 1;
+}
+
+/* Colonne droite (image dans une mat-card) */
+.hero__card--compact {
+  order: 2;
+  width: 100%;
+  max-width: 720px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-1, 0 8px 24px rgba(0, 0, 0, 0.08));
+}
+
+/* Option : image “sticky” sur desktop (effet magazine) */
+@media (min-width: 1100px) {
+  .hero__card--compact {
+    position: sticky;
+    top: 16px;
+  }
+}
+
+/* Titres compacts */
 .hero--compact .hero__title {
   margin-bottom: 0.25rem;
 }
+.section--compact {
+  padding: 2rem 0;
+}
 .hero__card--compact {
-  max-width: 640px;
+  /* already defined above */
 }
 
 /* clic visuel */
@@ -14,12 +47,32 @@
   cursor: zoom-in;
 }
 
+/* FIGURE media : pas d’écrasement + coins arrondis */
+.media--hero,
+.media--thumb-lg {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.media--hero img,
+.media--thumb-lg img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 /* Value Props */
 .vprops-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+}
+@media (max-width: 680px) {
+  .vprops-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .vprop-card {
   display: flex;
@@ -27,31 +80,33 @@
   padding: 1rem;
   border-radius: 16px;
   background: #fff;
+  border: 1px solid var(--app-border, #e7e7ec);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .vprop-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--app-primary-50, #e6f4ff);
 }
 .vprop-card__icon {
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-right: 0.75rem;
   margin-top: 0.1rem;
-  color: var(--mdc-theme-primary, #3f51b5);
+  color: var(--app-primary, #6750a4);
 }
 .vprop-card__title {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0 0 0.25rem;
 }
 .vprop-card__text {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--on-light-muted, #555b64);
 }
 
-/* Work cards — tout visible */
+/* Work cards — tout visible (inchangé sauf petits polissages) */
 .work-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -77,11 +132,12 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  display: block;
 }
 .work-card:hover .work-card__image img {
   transform: scale(1.03);
 }
-/* ✅ l’overlay ne bloque pas les clics */
+/* ✅ overlay clic transparent */
 .work-card__overlay {
   position: absolute;
   inset: auto 0 0 0;
@@ -92,12 +148,12 @@
   pointer-events: none;
 }
 .work-card__icon mat-icon {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #ffcc33;
 }
 .work-card__title {
-  font-size: 1.08rem;
-  font-weight: 700;
+  font-size: 1.06rem;
+  font-weight: 800;
   margin: 0.25rem 0 0.06rem;
 }
 .work-card__desc {
@@ -106,7 +162,6 @@
   margin: 0;
 }
 
-/* Détails visibles par défaut */
 .work-card__details {
   background: #fafafa;
   border-top: 1px solid #eee;
@@ -147,13 +202,154 @@
 .gallery__caption {
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--on-light-muted, #555b64);
 }
 
-/* Option (si styles locaux) : container du dialog */
+/* Dialog local option */
 :host ::ng-deep .lightbox-panel .mat-mdc-dialog-container {
   --mdc-dialog-container-color: transparent;
   background: transparent;
   box-shadow: none;
   padding: 0;
+}
+
+/* ====== Responsive : pile l’image sous les cartes < 1100px ============= */
+@media (max-width: 1100px) {
+  .hero .hero__inner {
+    grid-template-columns: 1fr;
+  }
+  .hero__card--compact {
+    order: 2;
+  }
+  .hero__copy {
+    order: 1;
+  }
+  .hero__card--compact {
+    position: static;
+  }
+}
+
+/* ===== HERO : header centré + cartes à gauche / image à droite ===== */
+
+.hero {
+  padding: clamp(16px, 2vw, 28px) 0;
+}
+
+.hero .hero__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* gauche + droite */
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: start;
+}
+
+/* Header centré au-dessus des 2 colonnes */
+.hero__header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: clamp(8px, 1.2vw, 16px);
+}
+.hero__title {
+  margin: 0 0 0.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.hero__subtitle {
+  margin: 0;
+  opacity: 1; /* jamais pâle */
+}
+
+/* Colonne gauche : value props */
+.hero__copy {
+  order: 1;
+}
+
+/* Grille des value props */
+.vprops-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+@media (max-width: 680px) {
+  .vprops-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Carte value prop (Material friendly) */
+.vprop-card {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--app-border, #e7e7ec);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.vprop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--app-primary-50, #e6f4ff);
+}
+.vprop-card__icon {
+  font-size: 1.6rem;
+  margin-right: 0.75rem;
+  margin-top: 0.1rem;
+  color: var(--app-primary, #6750a4);
+}
+.vprop-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+.vprop-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--on-light-muted, #555b64);
+}
+
+/* Colonne droite : carte image */
+.hero__card--compact {
+  order: 2;
+  width: 100%;
+  max-width: 820px; /* laisse respirer l'image */
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-2, 0 14px 40px rgba(0, 0, 0, 0.18));
+}
+.media--hero {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.media--hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* pas d’écrasement */
+}
+.hero__note {
+  margin-top: 0.5rem;
+}
+
+/* Clic visuel sur image */
+.clickable-img {
+  cursor: zoom-in;
+}
+
+/* Responsive : empile tout < 1100px (header reste centré) */
+@media (max-width: 1100px) {
+  .hero .hero__inner {
+    grid-template-columns: 1fr;
+  }
+  .hero__header {
+    grid-column: 1;
+  }
+  .hero__card--compact {
+    order: 2;
+  }
+  .hero__copy {
+    order: 1;
+  }
 }
